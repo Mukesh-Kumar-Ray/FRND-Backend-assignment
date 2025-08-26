@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./db/db.js";
 import uploadRoute from "./routes/upload.route.js";
 import truckRoute from "./routes/truck.route.js";
+import serverless from "serverless-http";
 
 dotenv.config();
 connectDB();
@@ -13,7 +14,5 @@ app.use(express.json());
 app.use("/api/upload", uploadRoute);
 app.use("/api/trucks", truckRoute);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-export default app;
+export default serverless(app);
